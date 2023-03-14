@@ -11,6 +11,8 @@ body {
   scroll-snap-type: y mandatory;
 }
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -28,6 +30,22 @@ body {
   font-family: AtacamaIt;
   src: url(../public/font/AtacamaItalic-VF.ttf);
 }
+@font-face {
+  font-family: FamiljenGrotesk;
+  src: url(../public/font/FamiljenGrotesk-Variable.ttf);
+}
+@font-face {
+  font-family: FamiljenGroteskIt;
+  src: url(../public/font/FamiljenGrotesk-VariableItalic.ttf);
+}
+@font-face {
+  font-family: JetBrainsMono;
+  src: url(../public/font/JetBrainsMono-Variable.ttf);
+}
+@font-face {
+  font-family: JetBrainsMonoIt;
+  src: url(../public/font/JetBrainsMono-VariableItalic.ttf);
+}
 
 .section-container {
   height: 100vh;
@@ -44,6 +62,8 @@ body {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
   align-items: center;
+  overflow: hidden;
+  padding-top: 12px;
 }
 
 .name {
@@ -51,27 +71,31 @@ body {
   font-size: 8vw;
   font-weight: 900;
   margin: 0;
+  line-height: 65%;
+  pointer-events: none;
 }
 
 h1,
 h2{
-  font-family: Atacama;
-  font-variation-settings: "wdth" 50, "wght" 900, "CNTR" 100;
+  font-family: JetBrainsMono;
+  font-variation-settings: "wght" 500;
 }
 
 p {
-  font-variation-settings: "wght" 100, "wdth" 0;
+  font-variation-settings: "wght" 200, "wdth" 0;
+  -webkit-font-smoothing: antialiased;
 
 }
 
 #Alastair {
   grid-column-start: 2;
   grid-column-end: 6;
+  font-family: JetBrainsMono;
 }
 #Farman {
   grid-column-start: 3;
   grid-column-end: 6;
-  font-family: AtacamaIt;
+  font-family: JetBrainsMonoIt;
 }
 
 .title {
@@ -79,6 +103,7 @@ p {
   color: #e0e7ee;
   font-family: Alaska;
   font-variation-settings: "wght" 100, "wdth" 0;
+  pointer-events: none;
 }
 
 .section-content {
@@ -112,9 +137,21 @@ p {
   cursor: pointer;
 transform: rotate(180deg);}
 
+.about-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
 @media screen and (max-width: 1050px) {
   .section-container{
     flex-direction: column;
+  }
+
+  .name{
+    font-size: 12vw;
   }
 }
 
@@ -126,4 +163,8 @@ transform: rotate(180deg);}
   100% {
     transform: translateX(0%);
   }
+}
+
+#title{
+  background-image: url('../public/img/test.png');
 }

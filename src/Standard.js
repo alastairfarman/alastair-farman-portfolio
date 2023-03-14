@@ -1,6 +1,9 @@
 import Blob from "./Blob.js";
 
 export default function Standard() {
+
+
+
   return (
     <div className="section-container">
       <div className="section-content">

@@ -4,6 +4,7 @@ import { Perlin } from "three-noise";
 import { TextureLoader } from "three";
 import * as THREE from "three";
 import { Environment } from "@react-three/drei";
+
 import Modal from "./Modal";
 
 function Sphere() {
@@ -75,7 +76,7 @@ function Sphere() {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[1.5, 128, 128]} />
-      <meshStandardMaterial color={0x00fe00} roughness={0} />
+      <meshStandardMaterial color={0x00fe00} roughness={0.2} />
     </mesh>
   );
 }
@@ -83,6 +84,8 @@ function Sphere() {
 function OrbitingPlane({ position, texture, timeOffset, onClick }) {
   const meshRef = useRef();
   const material = useLoader(TextureLoader, texture);
+
+  const [isHovered, setIsHovered] = useState(false);
 
   useFrame((state, delta) => {
     const sphereRadius = 0.4;
@@ -103,14 +106,24 @@ function OrbitingPlane({ position, texture, timeOffset, onClick }) {
     meshRef.current.position.copy(planePosition);
   });
 
+  useEffect(() => {
+    document.body.style.cursor = isHovered ? "pointer" : "auto";
+  }, [isHovered]);
+
   return (
-    <mesh ref={meshRef} onClick={onClick}>
+    <mesh
+      ref={meshRef}
+      onClick={onClick}
+      onPointerOver={() => setIsHovered(true)}
+      onPointerOut={() => setIsHovered(false)}
+    >
       <planeGeometry args={[material.image.width / material.image.height, 1]} />
       <meshStandardMaterial
         map={material}
         metalness={0.2}
         side={THREE.DoubleSide}
         roughness={0.1}
+        style={{ cursor: "pointer" }}
       />
     </mesh>
   );
@@ -122,8 +135,8 @@ function Blob() {
 
   return (
     <>
-      <Canvas style={{flex: 2}}>
-        <ambientLight intensity={0.6} />
+      <Canvas style={{ flex: 2 }}>
+        <ambientLight intensity={0.8} />
         <Environment files="./hdr.hdr" />
         <Sphere />
         <OrbitingPlane
@@ -132,7 +145,10 @@ function Blob() {
           timeOffset={0}
           onClick={() => {
             setIsModalOpen(true);
-            setModalContent(["Second One","Content for plane 1"]);
+            setModalContent([
+              "Calorie Deficit Calculator",
+              "Comissioned by Grow With Pace Marketing for Performance Physique, a Midlands based personal training company, the site was built to gain leads for their 4Week4Kilo training program. It guides the user through information on the concept, and encourages them to input form information to calculate the calorie targets thye need to lose weight and submit their results and details to Performance Physique in return for an excercise and nutrition plan. The site was built using React as a one-page scroller with a header that transforms into a form submission element. React Hooks allowed for a smoother, more fluid user experience while also storing the input data form submission. This site is still in development, with the next feature being a P5 built interactive calorie demonstration that uses the data from the BMI calculation to display a graph which suggests how the user can plan a daily calorie intake while limiting the total calories for the week. While it is currently fully functional, the best implementation for user experience hasn't currently been decided.",
+            ]);
           }}
         />
         <OrbitingPlane
@@ -141,7 +157,7 @@ function Blob() {
           timeOffset={(Math.PI * 2) / 3}
           onClick={() => {
             setIsModalOpen(true);
-            setModalContent(["Second One","Content for plane 2"]);
+            setModalContent(["Second One", "Content for plane 2"]);
           }}
         />
         <OrbitingPlane
@@ -150,11 +166,15 @@ function Blob() {
           timeOffset={(Math.PI * 4) / 3}
           onClick={() => {
             setIsModalOpen(true);
-            setModalContent(["Third One","Content for plane 3"]);
+            setModalContent(["Third One", "Content for plane 3"]);
           }}
         />
       </Canvas>
-      <Modal isOpen={isModalOpen} content={modalContent} setIsModalOpen={setIsModalOpen} />
+      <Modal
+        isOpen={isModalOpen}
+        content={modalContent}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   );
 }
