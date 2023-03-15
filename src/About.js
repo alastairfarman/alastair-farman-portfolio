@@ -16,14 +16,12 @@ export default function About() {
           </p>
         </div>
         <div className="about-section">
-          <h2 className="section-title">Links</h2>
-          <p>
-            Hi, I'm a frontend developer and designer. I have a background in 3D
-            and animation, and have worked in the games industry. I have worked
-            with many different technologies, and have a strong interest in the
-            web. I have a passion for creating beautiful, functional and
-            accessible websites.
-          </p>
+          <h2 className="section-title">Project Links</h2>
+         <ul>
+          <li>
+            <a href="https://www.alastairfarman.com">Portfolio</a>
+          </li>
+         </ul>
         </div>
         <div className="about-section">
           <h2 className="section-title">Contact</h2>

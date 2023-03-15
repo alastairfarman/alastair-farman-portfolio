@@ -141,7 +141,7 @@ function Blob() {
         <Sphere />
         <OrbitingPlane
           position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/wcd.png"
+          texture="./img/wcd.jpg"
           timeOffset={0}
           onClick={() => {
             setIsModalOpen(true);
@@ -153,16 +153,20 @@ function Blob() {
         />
         <OrbitingPlane
           position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/wcd.png"
+          texture="./img/af.png"
           timeOffset={(Math.PI * 2) / 3}
           onClick={() => {
             setIsModalOpen(true);
-            setModalContent(["Second One", "Content for plane 2"]);
+            setModalContent([
+              "Portfolio",
+              "As part of my web development learning journey I have designed and built portfolios to practice and experiment with.",
+              "./img/flower.mov",
+            ]);
           }}
         />
         <OrbitingPlane
           position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/wcd.png"
+          texture="./img/wcd.jpg"
           timeOffset={(Math.PI * 4) / 3}
           onClick={() => {
             setIsModalOpen(true);
