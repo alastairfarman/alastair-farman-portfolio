@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Suspense } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Perlin } from "three-noise";
-import { TextureLoader } from "three";
-import * as THREE from "three";
+import { TextureLoader, Vector3, DoubleSide } from "./threeInstance";
 import { Environment } from "@react-three/drei";
 
 import Modal from "./Modal";
@@ -40,9 +39,9 @@ function Sphere() {
         // Scale the noise amplitude based on the distance from the center of the sphere
         const noiseValue =
           noise.get3(
-            new THREE.Vector3(x, y, z)
+            new Vector3(x, y, z)
               .multiplyScalar(1)
-              .addScalar(time.current * 0.005)
+              .addScalar(Math.sin(time.current * 0.005))
           ) *
           0.2 *
           (sphereRadius - distanceFromCenter);
@@ -93,10 +92,10 @@ function OrbitingPlane({ position, texture, timeOffset, onClick }) {
     const elapsedTime = state.clock.elapsedTime;
     const rotationSpeed = 0.2; // Change this value to adjust the rotation speed
 
-    const planePosition = new THREE.Vector3();
+    const planePosition = new Vector3();
     planePosition.copy(position);
     planePosition.applyAxisAngle(
-      new THREE.Vector3(0, 1, 0),
+      new Vector3(0, 1, 0),
       (elapsedTime * rotationSpeed + timeOffset) % (Math.PI * 2)
     );
 
@@ -121,7 +120,7 @@ function OrbitingPlane({ position, texture, timeOffset, onClick }) {
       <meshStandardMaterial
         map={material}
         metalness={0.2}
-        side={THREE.DoubleSide}
+        side={DoubleSide}
         roughness={0.1}
         style={{ cursor: "pointer" }}
       />
@@ -135,50 +134,76 @@ function Blob() {
 
   return (
     <>
-      <Canvas style={{ flex: 2 }}>
-        <ambientLight intensity={0.8} />
-        <Environment files="./hdr.hdr" />
-        <Sphere />
-        <OrbitingPlane
-          position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/wcd.jpg"
-          timeOffset={0}
-          onClick={() => {
-            setIsModalOpen(true);
-            setModalContent([
-              "Calorie Deficit Calculator",
-              "Comissioned by Grow With Pace Marketing for Performance Physique, a Midlands based personal training company, the site was built to gain leads for their 4Week4Kilo training program. It guides the user through information on the concept, and encourages them to input form information to calculate the calorie targets thye need to lose weight and submit their results and details to Performance Physique in return for an excercise and nutrition plan. The site was built using React as a one-page scroller with a header that transforms into a form submission element. React Hooks allowed for a smoother, more fluid user experience while also storing the input data form submission. This site is still in development, with the next feature being a P5 built interactive calorie demonstration that uses the data from the BMI calculation to display a graph which suggests how the user can plan a daily calorie intake while limiting the total calories for the week. While it is currently fully functional, the best implementation for user experience hasn't currently been decided.",
-            ]);
-          }}
+      <Suspense fallback="Loading...">
+        <Canvas style={{ flex: 2 }}>
+          <ambientLight intensity={0.8} />
+          <Environment files="./hdr.hdr" />
+          <Sphere />
+          <OrbitingPlane
+            position={new Vector3(5, 0, 0)}
+            texture="./img/wcd.jpg"
+            timeOffset={0}
+            onClick={() => {
+              setIsModalOpen(true);
+              setModalContent([
+                "Calorie Deficit Calculator",
+                "Comissioned by Grow With Pace Marketing for Performance Physique, a Midlands based personal training company, the site was built to gain leads for their 4Week4Kilo training program. It guides the user through information on the concept, and encourages them to input form information to calculate the calorie targets they need to lose weight and returns results which they can submit with their details to Performance Physique via Formspark in return for an excercise and nutrition plan. The site was built using React as a one-page scroller with a header that transforms into a form submission element. React Hooks allowed for a smoother, more fluid user experience while also storing the input data form submission. This project is ongoing, with the next feature being an interactive calorie demonstration built in p5.js that uses the data from the BMI calculation to display an interactive graph which suggests how the user can plan a daily calorie intake while limiting the total calories for the week. While it is currently fully functional, the best implementation for UX hasn't currently been decided.",
+                "./img/wcd1.png",
+                "./img/wcd2.webm",
+                "https://weeklycaloriedeficit.com/",
+              ]);
+            }}
+          />
+          <OrbitingPlane
+            position={new Vector3(5, 0, 0)}
+            texture="./img/af.png"
+            timeOffset={(Math.PI * 2) / 4}
+            onClick={() => {
+              setIsModalOpen(true);
+              setModalContent([
+                "Portfolio",
+                "As part of my web development learning journey I have designed and built portfolios to practice and experiment with, including this previous version of my work earlier this year.",
+                "./img/af1.png",
+                "./img/flower.mov",
+                "https://alastairfarman.github.io/AF3/",
+              ]);
+            }}
+          />
+          <OrbitingPlane
+            position={new Vector3(5, 0, 0)}
+            texture="./img/golf.png"
+            timeOffset={(Math.PI * 4) / 4}
+            onClick={() => {
+              setIsModalOpen(true);
+              setModalContent([
+                "Golfstore",
+                "A work in progress design, advisory and build for a new golf brand retailer. I researched potential headless CMS providers to allow the owner to manage their own content and take advantage of seamless checkout and payment features while giving me powerful customisation options. I have designed a preliminary look in Figma.",
+                "./img/golffig.png",
+              ]);
+            }}
+          />
+          <OrbitingPlane
+            position={new Vector3(5, 0, 0)}
+            texture="./img/afrtp.png"
+            timeOffset={(Math.PI * 6) / 4}
+            onClick={() => {
+              setIsModalOpen(true);
+              setModalContent([
+                "Retouch & Photography Portfolio",
+                "In order to separate my retouching and photography work from my web development work, I created an alternate simple image gallery portfolio.",
+                "./img/afrtp1.png",
+                "",
+                "https://alastairfarman.github.io/af-retouch-photography/",
+              ]);
+            }}
+          />
+        </Canvas>
+        <Modal
+          isOpen={isModalOpen}
+          content={modalContent}
+          setIsModalOpen={setIsModalOpen}
         />
-        <OrbitingPlane
-          position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/af.png"
-          timeOffset={(Math.PI * 2) / 3}
-          onClick={() => {
-            setIsModalOpen(true);
-            setModalContent([
-              "Portfolio",
-              "As part of my web development learning journey I have designed and built portfolios to practice and experiment with.",
-              "./img/flower.mov",
-            ]);
-          }}
-        />
-        <OrbitingPlane
-          position={new THREE.Vector3(5, 0, 0)}
-          texture="./img/wcd.jpg"
-          timeOffset={(Math.PI * 4) / 3}
-          onClick={() => {
-            setIsModalOpen(true);
-            setModalContent(["Third One", "Content for plane 3"]);
-          }}
-        />
-      </Canvas>
-      <Modal
-        isOpen={isModalOpen}
-        content={modalContent}
-        setIsModalOpen={setIsModalOpen}
-      />
+      </Suspense>
     </>
   );
 }

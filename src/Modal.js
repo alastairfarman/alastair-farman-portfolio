@@ -7,10 +7,24 @@ export default function Modal({ isOpen, content, setIsModalOpen }) {
     <div className="modal">
       <h2>{content[0]}</h2>
       <div className="modal-content">
-        <p>{content[1]}</p>
+        <div>
+          <p>{content[1]}</p>
+          {content[4] ? (
+            <a
+              href={content[4]}
+              target="_blank"
+              rel="noreferrer"
+              title="Opens in a new tab"
+            >
+              {content[4]}
+            </a>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="modal-graphics">
           <img
-            src="./img/wcd1.png"
+            src={content[2]}
             alt=""
             style={{
               width: "100%",
@@ -30,7 +44,7 @@ export default function Modal({ isOpen, content, setIsModalOpen }) {
               maxWidth: "400px",
             }}
           >
-            <source src={content[2]} type="video/mp4" />
+            <source src={content[3]} type="video/mp4" />
             This browser doesn't support video tag.
           </video>
         </div>

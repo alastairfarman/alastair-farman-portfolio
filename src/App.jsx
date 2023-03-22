@@ -3,6 +3,7 @@ import Title from './Title';
 import Standard from './Standard';
 import ProdVis from './ProdVis';
 import Three from './Three';
+import Three2 from './Three2';
 import About from './About';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <Title/>
     <Standard />
     <ProdVis />
-    <Three />
+    <Three2 />
     <About />
     </>
   );

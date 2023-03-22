@@ -2,8 +2,10 @@ import React, { Suspense, useMemo, useState, useRef } from "react";
 import { Canvas, useLoader, useFrame, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, Sphere, Float } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { MeshStandardMaterial, MeshPhysicalMaterial } from "three";
+import { MeshStandardMaterial, MeshPhysicalMaterial } from "./threeInstance";
 import { EffectComposer, Noise } from "@react-three/postprocessing";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 
 function Model({ url, frameColor }) {
   const gltf = useLoader(GLTFLoader, url);
@@ -92,11 +94,11 @@ function ColorSphere({ color, position, onClick }) {
 
   const handlePointerOver = (e) => {
     e.stopPropagation();
-    document.body.style.cursor = 'pointer';
+    document.body.style.cursor = "pointer";
   };
 
   const handlePointerOut = (e) => {
-    document.body.style.cursor = 'auto';
+    document.body.style.cursor = "auto";
   };
 
   return (
@@ -118,54 +120,64 @@ function ColorSphere({ color, position, onClick }) {
   );
 }
 
-
 export default function ProdVis() {
   const [frameColor, setFrameColor] = useState("black");
 
   return (
     <div className="section-container" id="reverse">
-      <Canvas camera={{ position: [0, 0, 5] }} style={{ padding: "2rem" }}>
-        <Suspense fallback={"LOADING"}>
+      <Suspense fallback={"Loading..."}>
+        <Canvas camera={{ position: [0, 0, 8] }}>
           <Model url="./models/sun2.glb" frameColor={frameColor} />
           <Environment files="./hdr3.hdr" />
-        </Suspense>
-        <OrbitControls minDistance={4.5} maxDistance={7} />
-        <EffectComposer>
-          <Noise opacity={0.05} />
-        </EffectComposer>
-        <Float speed={2} floatIntensity={2}>
-          <ColorSphere
-            color="black"
-            position={[0, 2, 0]}
-            onClick={() => setFrameColor("black")}
-          />
-        </Float>
-        <Float speed={2} floatIntensity={2}>
-          <ColorSphere
-            color="white"
-            position={[-2, 2, 0]}
-            onClick={() => setFrameColor("white")}
-          />
-        </Float>
-        <Float speed={2} floatIntensity={2}>
-          <ColorSphere
-            color="#77CCFF"
-            position={[2, 2, 0]}
-            onClick={() => setFrameColor("#77CCFF")}
-          />
-        </Float>
-      </Canvas>
-      <div className="section-content">
-        <h2 className="section-title">
-          Product Visualisation and Interactivity
-        </h2>
+          <OrbitControls minDistance={4.5} maxDistance={7} enablePan={false} />
+          {/* <EffectComposer>
+          </EffectComposer> */}
+          <Float speed={2} floatIntensity={2}>
+            <ColorSphere
+              color="black"
+              position={[0, 2, 0]}
+              onClick={() => setFrameColor("black")}
+            />
+          </Float>
+          <Float speed={2} floatIntensity={2}>
+            <ColorSphere
+              color="white"
+              position={[-2, 2, 0]}
+              onClick={() => setFrameColor("white")}
+            />
+          </Float>
+          <Float speed={2} floatIntensity={2}>
+            <ColorSphere
+              color="#77CCFF"
+              position={[2, 2, 0]}
+              onClick={() => setFrameColor("#77CCFF")}
+            />
+          </Float>
+        </Canvas>
+      </Suspense>
+      <div className="section-content" id="product-visualization-interactivity">
+        <h2 className="section-title">Product Visualisation & Interactivity</h2>
         <p>
           With a background in e-commerce retouch and photography, I've
-          naturally gravitated towards product visualization. I have experimented with bringing
-          3D elements into the browser, using WebGL based frameworks such as Three.js to craft interactive and visually appealing
-          experiences. I have also used images and videos rendered in 3D software for more familiar product experiences.
+          naturally gravitated towards product visualization. I have
+          experimented with bringing 3D elements into the browser, using WebGL
+          based frameworks such as Three.js to craft interactive and visually
+          appealing experiences. I have also used images and videos rendered in
+          3D software for more familiar product experiences.
+          <a
+            href="https://alastairfarman.github.io/ecom-example/"
+            target="_blank"
+            rel="noreferrer"
+            title="Opens in a new tab"
+          >
+            Here
+          </a>
+          is an example of a basic product page I created with an image slider
+          to create a rendered 360 view of a product. The site also has a
+          functional color picker and shopping basket.
         </p>
       </div>
+      <FontAwesomeIcon icon={faHandPointer} className="interact l fa-bounce" />
     </div>
   );
 }
