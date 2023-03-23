@@ -37,7 +37,20 @@ export default function Title() {
     }
   };
 
+  // const isIOS =
+  //   /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
   useEffect(() => {
+    // test if scroll effect is causing iOs/Safari to crash. Confirmation that it isn't, but leaving this code in for future reference.
+
+    // if (isIOS) {
+    //   // Return early if the device is an iOS device
+    //   console.log("iOS device detected.")
+    //   return;
+    // }
+
+    // console.log("Non-iOS device detected.")
+
     const root = document.getElementById("root");
 
     const handleScroll = () => {
@@ -110,7 +123,7 @@ export default function Title() {
             right: "1rem",
             zIndex: 3,
             textAlign: "right",
-            padding: "10px",
+            padding: "1rem",
             borderRadius: "5px",
             display: isMenuHovered ? "flex" : "none",
             flexDirection: "column",
@@ -168,10 +181,10 @@ export default function Title() {
 
         <video
           id="fabric-video"
-          src={"./img/fabric.webm"}
           autoPlay
           loop
           muted
+          playsInline
           style={{
             position: "absolute",
             width: "100%",
@@ -182,7 +195,11 @@ export default function Title() {
             transform: "scaleX(-1)",
             zIndex: "1",
           }}
-        ></video>
+        >
+          <source src="./img/fabric.mp4" type={`video/mp4; codecs="hvc1"`} />
+          <source src="./img/fabric.webm" type="video/webm" />
+        </video>
+
         <div id="grid-title">
           <h1
             className="name"

@@ -22,7 +22,6 @@
     "react-scripts": "5.0.1",
     "simplex-noise": "^4.0.1",
     "three": "^0.150.1",
-    "three-noise": "^1.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -53,5 +52,8 @@
   },
   "devDependencies": {
     "gh-pages": "^5.0.0"
+  },
+  "resolutions": {
+    "three": "0.150.1"
   }
 }

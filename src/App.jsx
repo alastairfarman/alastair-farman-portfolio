@@ -1,19 +1,18 @@
-import React from 'react';
-import Title from './Title';
-import Standard from './Standard';
-import ProdVis from './ProdVis';
-import Three from './Three';
-import Three2 from './Three2';
-import About from './About';
+import React from "react";
+import Title from "./Title";
+import Standard from "./Standard";
+import ProdVis from "./ProdVis";
+import Three2 from "./Three2";
+import About from "./About";
 
 function App() {
   return (
     <>
-    <Title/>
-    <Standard />
-    <ProdVis />
-    <Three2 />
-    <About />
+      <Title />
+      <Standard />
+      <ProdVis />
+      <Three2 />
+      <About />
     </>
   );
 }

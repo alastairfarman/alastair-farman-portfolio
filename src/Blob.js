@@ -1,8 +1,14 @@
 import React, { useRef, useEffect, useState, Suspense } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Perlin } from "three-noise";
-import { TextureLoader, Vector3, DoubleSide } from "./threeInstance";
-import { Environment } from "@react-three/drei";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  Environment,
+  Perlin,
+  Vector3,
+  TextureLoader,
+  DoubleSide,
+} from "./threeInstance.js";
 
 import Modal from "./Modal";
 
@@ -14,7 +20,7 @@ function Sphere() {
   const time = useRef(0);
 
   // Create a Perlin noise object with a random seed
-  const noise = new Perlin(Math.random());
+  const noise = Perlin();
 
   useFrame((state, delta) => {
     if (isReady.current) {

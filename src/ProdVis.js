@@ -1,9 +1,18 @@
 import React, { Suspense, useMemo, useState, useRef } from "react";
-import { Canvas, useLoader, useFrame, useThree } from "@react-three/fiber";
-import { Environment, OrbitControls, Sphere, Float } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { MeshStandardMaterial, MeshPhysicalMaterial } from "./threeInstance";
-import { EffectComposer, Noise } from "@react-three/postprocessing";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  useThree,
+  Environment,
+  OrbitControls,
+  Sphere,
+  Float,
+  GLTFLoader,
+  MeshStandardMaterial,
+  MeshPhysicalMaterial,
+} from "./threeInstance.js";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 
@@ -169,9 +178,10 @@ export default function ProdVis() {
             target="_blank"
             rel="noreferrer"
             title="Opens in a new tab"
+            style={{ color: "black" }}
           >
             Here
-          </a>
+          </a>{" "}
           is an example of a basic product page I created with an image slider
           to create a rendered 360 view of a product. The site also has a
           functional color picker and shopping basket.

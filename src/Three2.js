@@ -1,8 +1,14 @@
 import React, { Suspense, useRef, useEffect, useState } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import { Vector3, MeshStandardMaterial } from "./threeInstance";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  Environment,
+  GLTFLoader,
+  Vector3,
+  MeshStandardMaterial,
+} from "./threeInstance.js";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import ModalImage from "./ModalImage";
@@ -82,13 +88,18 @@ export default function Three2() {
             style={{
               width: "100%",
               maxWidth: "500px",
-              filter: "brightness(1.5)",
+              filter: "brightness(1.4)",
             }}
             muted
             autoPlay
             loop
+            playsInline
           >
-            <source src="./img/kickflip-tr.webm" />
+            <source
+              src="./img/kickflip-tr.mp4"
+              type={`video/mp4; codecs="hvc1"`}
+            />
+            <source src="./img/kickflip-tr.webm" type="video/webm" />
           </video>
         </div>
       </div>
