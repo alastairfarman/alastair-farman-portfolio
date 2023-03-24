@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { createContext } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, Sphere, Float } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -11,6 +12,8 @@ const Perlin = () => {
   };
 };
 
+const SharedGLContext = createContext(null);
+
 const {
   Vector3,
   TextureLoader,
@@ -18,6 +21,7 @@ const {
   Fog,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
+  Raycaster,
 } = THREE;
 
 export {
@@ -38,4 +42,6 @@ export {
   Fog,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
+  SharedGLContext,
+  Raycaster,
 };

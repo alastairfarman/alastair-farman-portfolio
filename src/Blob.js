@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useState, Suspense } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  Suspense,
+  useContext,
+} from "react";
 import {
   Canvas,
   useFrame,
@@ -8,6 +14,7 @@ import {
   Vector3,
   TextureLoader,
   DoubleSide,
+  SharedGLContext,
 } from "./threeInstance.js";
 
 import Modal from "./Modal";
@@ -25,6 +32,7 @@ function Sphere() {
   useFrame((state, delta) => {
     if (isReady.current) {
       const positionArray = meshRef.current.geometry.attributes.position.array;
+      const vector = new Vector3();
 
       // Loop through each vertex and modify its position according to Perlin noise
       for (let i = 0; i < positionArray.length; i += 3) {
@@ -43,14 +51,13 @@ function Sphere() {
         );
 
         // Scale the noise amplitude based on the distance from the center of the sphere
+        vector
+          .set(x, y, z)
+          .multiplyScalar(1)
+          .addScalar(Math.sin(time.current * 0.02));
+
         const noiseValue =
-          noise.get3(
-            new Vector3(x, y, z)
-              .multiplyScalar(1)
-              .addScalar(Math.sin(time.current * 0.005))
-          ) *
-          0.2 *
-          (sphereRadius - distanceFromCenter);
+          noise.get3(vector) * 0.2 * (sphereRadius - distanceFromCenter);
 
         positionArray[i] = originalX + noiseValue;
         positionArray[i + 1] = originalY + noiseValue;
@@ -80,7 +87,7 @@ function Sphere() {
 
   return (
     <mesh ref={meshRef}>
-      <sphereGeometry args={[1.5, 128, 128]} />
+      <sphereGeometry args={[1.5, 64, 64]} />
       <meshStandardMaterial color={0x00fe00} roughness={0.2} />
     </mesh>
   );
@@ -135,13 +142,23 @@ function OrbitingPlane({ position, texture, timeOffset, onClick }) {
 }
 
 function Blob() {
+  const { sharedGLContext, setSharedGLContext } = useContext(SharedGLContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
+
+  const onCreated = ({ gl }) => {
+    if (!sharedGLContext) {
+      setSharedGLContext(gl.context);
+    } else {
+      gl.context = sharedGLContext;
+    }
+  };
 
   return (
     <>
       <Suspense fallback="Loading...">
-        <Canvas style={{ flex: 2 }}>
+        <Canvas style={{ flex: 2 }} onCreated={onCreated}>
           <ambientLight intensity={0.8} />
           <Environment files="./hdr.hdr" />
           <Sphere />

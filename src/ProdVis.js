@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState, useRef } from "react";
+import React, { Suspense, useMemo, useState, useRef, useContext } from "react";
 import {
   Canvas,
   useFrame,
@@ -11,6 +11,8 @@ import {
   GLTFLoader,
   MeshStandardMaterial,
   MeshPhysicalMaterial,
+  SharedGLContext,
+  Raycaster,
 } from "./threeInstance.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -45,6 +47,16 @@ function Model({ url, frameColor }) {
       frame: new MeshPhysicalMaterial({
         color: frameColor,
         transmission: 0.2,
+        roughness: 0.2,
+      }),
+      arm: new MeshPhysicalMaterial({
+        color: frameColor,
+        transmission: 0.2,
+        roughness: 0.2,
+      }),
+      arm_metal: new MeshStandardMaterial({
+        color: "white",
+        metalness: 1,
         roughness: 0.2,
       }),
       hardware: new MeshStandardMaterial({
@@ -91,12 +103,13 @@ function Model({ url, frameColor }) {
 
 function ColorSphere({ color, position, onClick }) {
   const meshRef = useRef();
-  const { raycaster, camera, mouse } = useThree();
+  const { camera, mouse } = useThree();
+  const raycaster = useRef(new Raycaster());
 
   useFrame(() => {
     if (meshRef.current) {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([meshRef.current]);
+      raycaster.current.setFromCamera(mouse, camera);
+      const intersects = raycaster.current.intersectObjects([meshRef.current]);
       meshRef.current.material.opacity = intersects.length > 0 ? 0.8 : 1;
     }
   });
@@ -130,17 +143,24 @@ function ColorSphere({ color, position, onClick }) {
 }
 
 export default function ProdVis() {
+  const { sharedGLContext, setSharedGLContext } = useContext(SharedGLContext);
   const [frameColor, setFrameColor] = useState("black");
+
+  const onCreated = ({ gl }) => {
+    if (!sharedGLContext) {
+      setSharedGLContext(gl.context);
+    } else {
+      gl.context = sharedGLContext;
+    }
+  };
 
   return (
     <div className="section-container" id="reverse">
       <Suspense fallback={"Loading..."}>
-        <Canvas camera={{ position: [0, 0, 8] }}>
-          <Model url="./models/sun2.glb" frameColor={frameColor} />
+        <Canvas camera={{ position: [0, 0, 8] }} onCreated={onCreated}>
+          <Model url="./models/sunv4.glb" frameColor={frameColor} />
           <Environment files="./hdr3.hdr" />
           <OrbitControls minDistance={4.5} maxDistance={7} enablePan={false} />
-          {/* <EffectComposer>
-          </EffectComposer> */}
           <Float speed={2} floatIntensity={2}>
             <ColorSphere
               color="black"
@@ -172,7 +192,7 @@ export default function ProdVis() {
           experimented with bringing 3D elements into the browser, using WebGL
           based frameworks such as Three.js to craft interactive and visually
           appealing experiences. I have also used images and videos rendered in
-          3D software for more familiar product experiences.
+          3D software for more familiar product experiences.{" "}
           <a
             href="https://alastairfarman.github.io/ecom-example/"
             target="_blank"

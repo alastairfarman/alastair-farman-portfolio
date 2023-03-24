@@ -196,7 +196,10 @@ export default function Title() {
             zIndex: "1",
           }}
         >
-          <source src="./img/fabric.mp4" type={`video/mp4; codecs="hvc1"`} />
+          <source
+            src="./img/fabric_reducedQ.mp4"
+            type={`video/mp4; codecs="hvc1"`}
+          />
           <source src="./img/fabric.webm" type="video/webm" />
         </video>
 

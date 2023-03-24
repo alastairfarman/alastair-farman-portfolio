@@ -276,15 +276,6 @@ li {
   backdrop-filter: blur(5px);
 }
 
-@keyframes slide-in-left {
-  0% {
-    transform: translateX(110%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-
 .modalImage {
   display: flex;
   flex-direction: column;

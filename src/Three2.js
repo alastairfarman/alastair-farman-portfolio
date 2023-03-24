@@ -1,4 +1,10 @@
-import React, { Suspense, useRef, useEffect, useState } from "react";
+import React, {
+  Suspense,
+  useRef,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import {
   Canvas,
   useFrame,
@@ -7,6 +13,7 @@ import {
   GLTFLoader,
   Vector3,
   MeshStandardMaterial,
+  SharedGLContext,
 } from "./threeInstance.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,7 +54,7 @@ function SpinningNum({ num, position, onClick }) {
       object={num.scene}
       ref={mesh}
       position={position}
-      scale={2}
+      scale={3}
       onClick={onClick}
       onPointerOver={() => setIsHovered(true)}
       onPointerOut={() => setIsHovered(false)}
@@ -56,6 +63,8 @@ function SpinningNum({ num, position, onClick }) {
 }
 
 export default function Three2() {
+  const { sharedGLContext, setSharedGLContext } = useContext(SharedGLContext);
+
   const one = useLoader(GLTFLoader, "./models/one.glb");
   const two = useLoader(GLTFLoader, "./models/two.glb");
   const three = useLoader(GLTFLoader, "./models/three.glb");
@@ -64,6 +73,14 @@ export default function Three2() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState([]);
+
+  const onCreated = ({ gl }) => {
+    if (!sharedGLContext) {
+      setSharedGLContext(gl.context);
+    } else {
+      gl.context = sharedGLContext;
+    }
+  };
 
   return (
     <div className="section-container" id="rendering-animation">
@@ -104,7 +121,7 @@ export default function Three2() {
         </div>
       </div>
       <Suspense fallback="Loading...">
-        <Canvas style={{ flex: "2" }}>
+        <Canvas style={{ flex: "2" }} onCreated={onCreated}>
           <ambientLight intensity={0.6} />
           <Environment files="./hdr.hdr" />
           <SpinningNum
@@ -169,7 +186,6 @@ export default function Three2() {
                 "./img/renders/env4.png",
                 "./img/renders/env5.jpg",
                 "./img/renders/env6.jpg",
-                "./img/renders/env7.jpg",
                 "./img/renders/env8.png",
                 "./img/renders/env9.mp4",
               ]);
@@ -183,13 +199,13 @@ export default function Three2() {
               setIsModalOpen(true);
               setModalContent([
                 "Other explorations",
+                "./img/renders/r5.png",
+                "./img/renders/r6.webm",
+                "./img/renders/j.webm",
                 "./img/renders/r1.png",
                 "./img/renders/r2.png",
                 "./img/renders/r3.webm",
                 "./img/renders/r4.png",
-                "./img/renders/r5.png",
-                "./img/renders/r6.webm",
-                "./img/renders/j.webm",
               ]);
             }}
           />
