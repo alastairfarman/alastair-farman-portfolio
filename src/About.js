@@ -35,6 +35,16 @@ export default function About() {
           <ul>
             <li>
               <a
+                href="https://alastairfarman.github.io/NeRF-Test/"
+                target="_blank"
+                rel="noreferrer"
+                title="Opens in a new tab"
+              >
+                An ongoing blog of my research into NeRFs and Photogrammetry
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://www.alastairfarman.com"
                 target="_blank"
                 rel="noreferrer"
@@ -71,7 +81,7 @@ export default function About() {
                 title="Opens in a new tab"
               >
                 A 'Net-A-Porter.com' clone pulling data from a JSON file, with
-                sort and filter functions.
+                sort and filter functions
               </a>
             </li>
             <li>
@@ -82,7 +92,7 @@ export default function About() {
                 title="Opens in a new tab"
               >
                 BE@RBRICK product selector, playing with scroll animations and
-                useState.
+                useState
               </a>
             </li>
             <li>
