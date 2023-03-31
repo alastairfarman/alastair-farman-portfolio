@@ -158,12 +158,22 @@ export default function About() {
               </li>
               <li>
                 <a
+                  href="https://www.instagram.com/images.af/"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Opens in a new tab"
+                >
+                  Instagram for spamming 3D/visual based experiments
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://www.instagram.com/alastairfarman/"
                   target="_blank"
                   rel="noreferrer"
                   title="Opens in a new tab"
                 >
-                  Instagram
+                  Personal Instagram
                 </a>
               </li>
             </ul>

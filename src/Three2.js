@@ -166,9 +166,9 @@ export default function Three2() {
               setIsModalOpen(true);
               setModalContent([
                 "Modelling skateboard components, materials and texturing, animation",
-                "./img/renders/SK81.png",
-                "./img/renders/SK82.png",
-                "./img/renders/SK83.png",
+                "./img/renders/sk81.png",
+                "./img/renders/sk82.png",
+                "./img/renders/sk83.png",
                 "./img/kickflip-tr.webm",
               ]);
             }}

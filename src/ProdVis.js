@@ -1,9 +1,14 @@
-import React, { Suspense, useMemo, useState, useRef, useContext } from "react";
+import React, {
+  Suspense,
+  useMemo,
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from "react";
 import {
   Canvas,
-  useFrame,
   useLoader,
-  useThree,
   Environment,
   OrbitControls,
   Sphere,
@@ -12,7 +17,8 @@ import {
   MeshStandardMaterial,
   MeshPhysicalMaterial,
   SharedGLContext,
-  Raycaster,
+  sRGBEncoding,
+  LinearEncoding
 } from "./threeInstance.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -87,7 +93,7 @@ function Model({ url, frameColor }) {
     };
   }, [frameColor]);
 
-  useFrame(() => {
+  useEffect(() => {
     if (materials.current) {
       gltf.scene.traverse((child) => {
         if (child.isMesh && materials.current.hasOwnProperty(child.name)) {
@@ -96,23 +102,13 @@ function Model({ url, frameColor }) {
         }
       });
     }
-  });
+  }, [frameColor, gltf.scene]);
 
   return <primitive object={gltf.scene} dispose={null} />;
 }
 
 function ColorSphere({ color, position, onClick }) {
   const meshRef = useRef();
-  const { camera, mouse } = useThree();
-  const raycaster = useRef(new Raycaster());
-
-  useFrame(() => {
-    if (meshRef.current) {
-      raycaster.current.setFromCamera(mouse, camera);
-      const intersects = raycaster.current.intersectObjects([meshRef.current]);
-      meshRef.current.material.opacity = intersects.length > 0 ? 0.8 : 1;
-    }
-  });
 
   const handlePointerOver = (e) => {
     e.stopPropagation();
@@ -134,8 +130,8 @@ function ColorSphere({ color, position, onClick }) {
       material={
         new MeshPhysicalMaterial({
           color: color,
-          transmission: 0.3,
-          roughness: 0.5,
+          transmission: 0.2,
+          roughness: 0,
         })
       }
     />
@@ -159,7 +155,7 @@ export default function ProdVis() {
       <Suspense fallback={"Loading..."}>
         <Canvas camera={{ position: [0, 0, 8] }} onCreated={onCreated}>
           <Model url="./models/sunv4.glb" frameColor={frameColor} />
-          <Environment files="./hdr3.hdr" />
+          <Environment files="./hdr.hdr" encoding={LinearEncoding} />
           <OrbitControls minDistance={4.5} maxDistance={7} enablePan={false} />
           <Float speed={2} floatIntensity={2}>
             <ColorSphere
@@ -177,9 +173,9 @@ export default function ProdVis() {
           </Float>
           <Float speed={2} floatIntensity={2}>
             <ColorSphere
-              color="#77CCFF"
+              color="#55AAFF"
               position={[2, 2, 0]}
-              onClick={() => setFrameColor("#77CCFF")}
+              onClick={() => setFrameColor("#55AAFF")}
             />
           </Float>
         </Canvas>

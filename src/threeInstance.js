@@ -22,6 +22,8 @@ const {
   MeshStandardMaterial,
   MeshPhysicalMaterial,
   Raycaster,
+  sRGBEncoding,
+  LinearEncoding
 } = THREE;
 
 export {
@@ -44,4 +46,6 @@ export {
   MeshPhysicalMaterial,
   SharedGLContext,
   Raycaster,
+  sRGBEncoding,
+  LinearEncoding
 };
