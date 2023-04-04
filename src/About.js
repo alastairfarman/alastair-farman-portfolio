@@ -163,7 +163,7 @@ export default function About() {
                   rel="noreferrer"
                   title="Opens in a new tab"
                 >
-                  Instagram for spamming 3D/visual based experiments
+                  Instagram for 3D/visual based experiments
                 </a>
               </li>
               <li>
