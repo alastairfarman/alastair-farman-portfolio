@@ -180,7 +180,7 @@ function Blob() {
           <OrbitingPlane
             position={new Vector3(5, 0, 0)}
             texture="./img/af.png"
-            timeOffset={(Math.PI * 2) / 4}
+            timeOffset={(Math.PI * 2 * 1) / 5}
             onClick={() => {
               setIsModalOpen(true);
               setModalContent([
@@ -195,7 +195,7 @@ function Blob() {
           <OrbitingPlane
             position={new Vector3(5, 0, 0)}
             texture="./img/golf.png"
-            timeOffset={(Math.PI * 4) / 4}
+            timeOffset={(Math.PI * 2 * 2) / 5}
             onClick={() => {
               setIsModalOpen(true);
               setModalContent([
@@ -208,7 +208,7 @@ function Blob() {
           <OrbitingPlane
             position={new Vector3(5, 0, 0)}
             texture="./img/afrtp.png"
-            timeOffset={(Math.PI * 6) / 4}
+            timeOffset={(Math.PI * 2 * 3) / 5}
             onClick={() => {
               setIsModalOpen(true);
               setModalContent([
@@ -218,6 +218,14 @@ function Blob() {
                 "",
                 "https://alastairfarman.github.io/af-retouch-photography/",
               ]);
+            }}
+          />
+          <OrbitingPlane
+            position={new Vector3(5, 0, 0)}
+            texture="./img/ar.png"
+            timeOffset={(Math.PI * 2 * 4) / 5}
+            onClick={() => {
+              // Add onClick logic for the new plane
             }}
           />
         </Canvas>
