@@ -215,7 +215,7 @@ function Blob() {
                 "Piste Map - Concept, Work in Progress",
                 "An idea I had after being frustrated with pixelated jpg piste maps for snow sports. I found a 3D model of the resort La Plagne with the runs attached. I created empties for the different town locations, and added a curve to represent a lift for proof of concept. The user can navigate the map, toggle the run overlay, and see hourly weather forecast, lift status and resort information fetched from an API. The API information itself sometimes breaks and the lift info is fetch limited, so I added error catching. It needs aesthetic improvements, and I would like to add features such as time-of-day based lighting, use the data to drive more in the scene (for example, top and bottom temperature data as a colour mapped to the elevation of the model), and complete the lift system - which would require a lot of time to complete in blender. Once done, the individual lift data from the API could then be attached the the lift objects, creating a live view. ",
                 "./img/piste.png",
-                "./img/piste.mov",
+                "",
                 "https://alastairfarman.github.io/ski-resort/",
               ]);
             }}
