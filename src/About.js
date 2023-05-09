@@ -26,7 +26,7 @@ export default function About() {
             and prolong my inevitable replacement.
             <br />
             <br />
-            Outside of my professional life I'm an extremely amateur footballer,
+            Outside of my professional life I'm an amateur footballer,
             snowboarder and have recently discovered yoga.
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function About() {
             </li>
             <li>
               <a
-                href="https://www.alastairfarman.com"
+                href="https://alastairfarman.github.io/af-retouch-photography/"
                 target="_blank"
                 rel="noreferrer"
                 title="Opens in a new tab"
@@ -55,7 +55,7 @@ export default function About() {
             </li>
             <li>
               <a
-                href="https://www.alastairfarman.com"
+                href="https://alastairfarman.github.io/soccerball/"
                 target="_blank"
                 rel="noreferrer"
                 title="Opens in a new tab"
@@ -65,7 +65,7 @@ export default function About() {
             </li>
             <li>
               <a
-                href="https://www.alastairfarman.com"
+                href="https://alastairfarman.github.io/bmw/"
                 target="_blank"
                 rel="noreferrer"
                 title="Opens in a new tab"
@@ -86,7 +86,7 @@ export default function About() {
             </li>
             <li>
               <a
-                href="https://codepen.io/alastairfarman/pen/dyqbQKm"
+                href="https://alastairfarman.github.io/bearbrick-jstest/"
                 target="_blank"
                 rel="noreferrer"
                 title="Opens in a new tab"
@@ -125,9 +125,7 @@ export default function About() {
           </ul>
         </div>
         <div className="about-section">
-          <h3 className="about-section-title">
-            Contact Information and Social
-          </h3>
+          <h3 className="about-section-title">Contact Information</h3>
           <div className="contact-container">
             <ul>
               <li>
@@ -144,7 +142,9 @@ export default function About() {
                 </a>
               </li>
               <li>
-                <a href="./Alastair-Farman-CV.pdf">CV</a>
+                <a href="./AlastairFarman-WebDeveloper3DGeneralistRetoucherPhotographer-CV.pdf">
+                  CV
+                </a>
               </li>
               <li>
                 <a
@@ -154,26 +154,6 @@ export default function About() {
                   title="Opens in a new tab"
                 >
                   Github
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/images.af/"
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Opens in a new tab"
-                >
-                  Instagram for 3D/visual based experiments
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/alastairfarman/"
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Opens in a new tab"
-                >
-                  Personal Instagram
                 </a>
               </li>
             </ul>

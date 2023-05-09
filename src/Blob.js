@@ -185,7 +185,7 @@ function Blob() {
               setIsModalOpen(true);
               setModalContent([
                 "Portfolio",
-                "As part of my web development learning journey I have designed and built portfolios to practice and experiment with, including this previous version of my work earlier this year.",
+                "As part of my web development learning journey I have designed and built portfolios to practice and experiment with, including this previous presentation of my work earlier this year.",
                 "./img/af1.png",
                 "./img/flower.mov",
                 "https://alastairfarman.github.io/AF3/",
@@ -200,32 +200,39 @@ function Blob() {
               setIsModalOpen(true);
               setModalContent([
                 "Golfstore",
-                "A work in progress design, advisory and build for a new golf brand retailer. I researched potential headless CMS providers to allow the owner to manage their own content and take advantage of seamless checkout and payment features while giving me powerful customisation options. I have designed a preliminary look in Figma.",
+                "Currently desiging and advising on a build for a new golf brand retailer. I researched potential headless CMS providers to allow the owner to manage their own content and take advantage of seamless checkout and payment features while giving me powerful customisation options. I have designed a preliminary look in Figma.",
                 "./img/golffig.png",
               ]);
             }}
           />
           <OrbitingPlane
             position={new Vector3(5, 0, 0)}
-            texture="./img/afrtp.png"
+            texture="./img/ski.png"
             timeOffset={(Math.PI * 2 * 3) / 5}
             onClick={() => {
               setIsModalOpen(true);
               setModalContent([
-                "Retouch & Photography Portfolio",
-                "In order to separate my retouching and photography work from my web development work, I created an alternate simple image gallery portfolio.",
-                "./img/afrtp1.png",
-                "",
-                "https://alastairfarman.github.io/af-retouch-photography/",
+                "Piste Map - Concept, Work in Progress",
+                "An idea I had after being frustrated with pixelated jpg piste maps for snow sports. I found a 3D model of the resort La Plagne with the runs attached. I created empties for the different town locations, and added a curve to represent a lift for proof of concept. The user can navigate the map, toggle the run overlay, and see hourly weather forecast, lift status and resort information fetched from an API. The API information itself sometimes breaks and the lift info is fetch limited, so I added error catching. It needs aesthetic improvements, and I would like to add features such as time-of-day based lighting, use the data to drive more in the scene (for example, top and bottom temperature data as a colour mapped to the elevation of the model), and complete the lift system - which would require a lot of time to complete in blender. Once done, the individual lift data from the API could then be attached the the lift objects, creating a live view. ",
+                "./img/piste.png",
+                "./img/piste.mov",
+                "https://alastairfarman.github.io/ski-resort/",
               ]);
             }}
           />
           <OrbitingPlane
             position={new Vector3(5, 0, 0)}
-            texture="./img/ar.png"
+            texture="./img/arback.png"
             timeOffset={(Math.PI * 2 * 4) / 5}
             onClick={() => {
-              // Add onClick logic for the new plane
+              setIsModalOpen(true);
+              setModalContent([
+                "Scrolling Story in WebGl 3D",
+                "Exploring more three.js/drei framework features, focusing on scrolling. Another WIP, I have rigged other elements of the car such as the wheels and engine cover to animate. I could also add hotspots to empties to highlight certain objects, include more user input for interactivity and so on.",
+                "./img/ar.png",
+                "./img/ar.mov",
+                "https://alastairfarman.github.io/alfa-3/",
+              ]);
             }}
           />
         </Canvas>
